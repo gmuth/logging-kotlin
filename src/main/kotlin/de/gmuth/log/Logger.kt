@@ -48,7 +48,7 @@ abstract class Logger(val name: String) {
 
     open var logLevel = OFF
     open fun isEnabled(level: Level) = logLevel != OFF && logLevel <= level
-    abstract fun publish(logEvent: LogEvent)
+    abstract fun publish(level: Level, throwable: Throwable? = null, messageString: String?)
 
     @JvmOverloads
     fun trace(throwable: Throwable? = null, messageSupplier: MessageSupplier = { "" }) =
@@ -71,11 +71,8 @@ abstract class Logger(val name: String) {
         log(ERROR, throwable, messageSupplier)
 
     @JvmOverloads
-    fun log(messageLevel: Level, throwable: Throwable? = null, produceMessage: MessageSupplier) =
-        log(LogEvent(messageLevel, produceMessage, throwable))
-
-    fun log(logEvent: LogEvent) = logEvent.run {
-        if (isEnabled(level)) publish(logEvent)
+    fun log(level: Level, throwable: Throwable? = null, produceMessage: MessageSupplier) {
+        if (isEnabled(level)) publish(level, throwable, produceMessage()?.toString())
     }
 
     @JvmOverloads

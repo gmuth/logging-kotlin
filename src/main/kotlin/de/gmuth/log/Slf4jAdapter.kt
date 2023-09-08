@@ -20,7 +20,7 @@ class Slf4jAdapter(name: String) : Logger(name) {
         ERROR -> slf4jLogger.isErrorEnabled
     }
 
-    override fun publish(logEvent: LogEvent) = logEvent.run {
+    override fun publish(level: Level, throwable: Throwable?, messageString: String?) {
         when (level) {
             OFF -> Unit // don't publish anything
             TRACE -> slf4jLogger.trace(messageString, throwable)

@@ -13,16 +13,14 @@ class AndroidLogAdapter(name: String) : Logger(name) {
     override fun isEnabled(level: Level) =
         level != OFF && Log.isLoggable(name, level.toInt())
 
-    override fun publish(logEvent: LogEvent) {
-        logEvent.run {
-            when (level) {
-                OFF -> Unit // don't publish anything
-                TRACE -> Log.v(name, messageString, throwable)
-                DEBUG -> Log.d(name, messageString, throwable)
-                INFO -> Log.i(name, messageString, throwable)
-                WARN -> Log.w(name, messageString, throwable)
-                ERROR -> Log.e(name, messageString, throwable)
-            }
+    override fun publish(level: Level, throwable: Throwable?, messageString: String?) {
+        when (level) {
+            OFF -> Unit // don't publish anything
+            TRACE -> Log.v(name, messageString, throwable)
+            DEBUG -> Log.d(name, messageString, throwable)
+            INFO -> Log.i(name, messageString, throwable)
+            WARN -> Log.w(name, messageString, throwable)
+            ERROR -> Log.e(name, messageString, throwable)
         }
     }
 

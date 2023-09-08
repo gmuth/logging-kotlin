@@ -6,5 +6,5 @@ package de.gmuth.log
 
 object NoOperationLogger : Logger("") {
     override fun isEnabled(level: Level) = false
-    override fun publish(logEvent: LogEvent) = Unit
+    override fun publish(level: Level, throwable: Throwable?, messageString: String?) = Unit
 }

@@ -21,9 +21,8 @@ class JulAdapter(name: String) : Logger(name) {
     override fun isEnabled(level: Level) =
         julLogger.isLoggable(level.toJulLevel())
 
-    override fun publish(logEvent: LogEvent) = logEvent.run {
+    override fun publish(level: Level, throwable: Throwable?, messageString: String?) =
         julLogger.log(level.toJulLevel(), messageString, throwable)
-    }
 
     fun Level.toJulLevel(): java.util.logging.Level = when (this) {
         OFF -> java.util.logging.Level.OFF

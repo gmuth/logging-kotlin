@@ -41,3 +41,21 @@ fun Logger.warning(thrown: Throwable, msgSupplier: Supplier<String?> = Supplier 
 
 fun Logger.severe(thrown: Throwable, msgSupplier: Supplier<String?> = Supplier { "" }) =
     log(SEVERE, thrown, msgSupplier)
+
+// ----- aliases -----
+
+// trace --> finer
+fun Logger.trace(thrown: Throwable? = null, msgSupplier: Supplier<String?> = Supplier { "" }) =
+    if(thrown == null) finer(msgSupplier) else finer(thrown, msgSupplier)
+
+// debug --> fine
+fun Logger.debug(thrown: Throwable? = null, msgSupplier: Supplier<String?> = Supplier { "" }) =
+    if(thrown == null) fine(msgSupplier) else fine(thrown, msgSupplier)
+
+// warn --> warning
+fun Logger.warn(thrown: Throwable? = null, msgSupplier: Supplier<String?> = Supplier { "" }) =
+    if(thrown == null) warning(msgSupplier) else warning(thrown, msgSupplier)
+
+// error --> severe
+fun Logger.error(thrown: Throwable? = null, msgSupplier: Supplier<String?> = Supplier { "" }) =
+    if(thrown == null) severe(msgSupplier) else severe(thrown, msgSupplier)

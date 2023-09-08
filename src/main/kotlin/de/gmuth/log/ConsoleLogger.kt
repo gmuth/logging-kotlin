@@ -21,11 +21,9 @@ class ConsoleLogger(name: String) : Logger(name) {
         logLevel = defaultLogLevel
     }
 
-    override fun publish(logEvent: LogEvent) {
+    override fun publish(level: Level, throwable: Throwable?, messageString: String?) {
         val loggerName = if (simpleClassName) name.substringAfterLast(".") else name
-        logEvent.run {
-            print(format.format(now(), loggerName, level, messageString))
-            throwable?.printStackTrace(PrintWriter(System.out, true))
-        }
+        print(format.format(now(), loggerName, level, messageString))
+        throwable?.printStackTrace(PrintWriter(System.out, true))
     }
 }
