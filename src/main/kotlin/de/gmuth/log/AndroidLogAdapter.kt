@@ -11,7 +11,14 @@ import de.gmuth.log.Logger.Level.*
 class AndroidLogAdapter(name: String) : Logger(name) {
 
     override fun isEnabled(level: Level) =
-        level != OFF && Log.isLoggable(name, level.toInt())
+        when (level) {
+            OFF -> false
+            TRACE -> Log.isLoggable(name, Log.VERBOSE)
+            DEBUG -> Log.isLoggable(name, Log.DEBUG)
+            INFO -> Log.isLoggable(name, Log.INFO)
+            WARN -> Log.isLoggable(name, Log.WARN)
+            ERROR -> Log.isLoggable(name, Log.ERROR)
+        }
 
     override fun publish(level: Level, throwable: Throwable?, messageString: String?) {
         when (level) {
@@ -22,14 +29,5 @@ class AndroidLogAdapter(name: String) : Logger(name) {
             WARN -> Log.w(name, messageString, throwable)
             ERROR -> Log.e(name, messageString, throwable)
         }
-    }
-
-    private fun Level.toInt() = when (this) {
-        TRACE -> Log.VERBOSE
-        DEBUG -> Log.DEBUG
-        INFO -> Log.INFO
-        WARN -> Log.WARN
-        ERROR -> Log.ERROR
-        else -> throw IllegalArgumentException(this.toString())
     }
 }
