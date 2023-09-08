@@ -2,10 +2,11 @@ plugins {
     id("org.jetbrains.kotlin.jvm") version "1.7.22"
     id("org.sonarqube") version "4.3.0.3225" // https://plugins.gradle.org/plugin/org.sonarqube
     id("jacoco")
+    id("maven-publish")
 }
 
 group = "de.gmuth"
-version = "1.0-SNAPSHOT"
+version = "1.0"
 
 repositories {
     mavenCentral()
@@ -81,4 +82,35 @@ sonar {
 
 tasks.sonar {
     dependsOn(tasks.jacocoTestReport) // for coverage
+}
+
+publishing {
+    publications {
+        create<MavenPublication>("logging-kotlin") {
+            from(components["java"])
+            pom {
+                name.set("logging-kotlin library")
+                description.set("A logging library for kotlin")
+                url.set("https://github.com/gmuth/logging-kotlin")
+                licenses {
+                    license {
+                        name.set("MIT License")
+                        url.set("https://raw.githubusercontent.com/gmuth/ipp-client-kotlin/master/LICENSE")
+                    }
+                }
+                developers {
+                    developer {
+                        id.set("gmuth")
+                        name.set("Gerhard Muth")
+                        email.set("gerhard.muth@gmx.de")
+                    }
+                }
+                scm {
+                    connection.set("scm:git:git://github.com/gmuth/logging-kotlin.git")
+                    developerConnection.set("scm:git:ssh://git@github.com/gmuth/logging-kotlin.git")
+                    url.set("https://github.com/gmuth/logging-kotlin")
+                }
+            }
+        }
+    }
 }
