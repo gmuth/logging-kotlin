@@ -1,4 +1,5 @@
 package de.gmuth.log
+import de.gmuth.log.Logger.Level
 
 class LoggerTest(val clazz: Class<*>) {
     fun run(level: Level? = null) {

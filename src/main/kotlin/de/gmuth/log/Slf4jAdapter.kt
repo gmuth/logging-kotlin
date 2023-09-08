@@ -4,7 +4,7 @@ package de.gmuth.log
  * Copyright (c) 2023 Gerhard Muth
  */
 
-import de.gmuth.log.Level.*
+import de.gmuth.log.Logger.Level.*
 
 // http://www.slf4j.org
 class Slf4jAdapter(name: String) : Logger(name) {
@@ -20,7 +20,7 @@ class Slf4jAdapter(name: String) : Logger(name) {
         ERROR -> slf4jLogger.isErrorEnabled
     }
 
-    override fun publish(logEvent: LogEvent) = with(logEvent) {
+    override fun publish(logEvent: LogEvent) = logEvent.run {
         when (level) {
             OFF -> Unit // don't publish anything
             TRACE -> slf4jLogger.trace(messageString, throwable)

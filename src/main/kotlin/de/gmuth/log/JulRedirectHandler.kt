@@ -14,7 +14,7 @@ import java.util.logging.Logger
 object JulRedirectHandler : Handler() {
 
     override fun publish(logRecord: LogRecord) = logRecord.run {
-        getLogger(loggerName).log(level.toLogLevel(), thrown) { message }
+        getLogger(loggerName).log(level.toLoggerLevel(), thrown) { message }
     }
 
     override fun flush() = Unit

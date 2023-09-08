@@ -14,19 +14,19 @@ repositories {
 // update gradle wrapper
 // ./gradlew wrapper --gradle-version 7.6.2
 
-// -> gradle.properties
-val slf4jVersion: String by project
-val androidVersion: String by project
+val javaVersion = "11"
+val slf4jVersion = "1.7.36"
+val androidVersion = "4.1.1.4"
 
 dependencies {
     testImplementation("org.jetbrains.kotlin:kotlin-test")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit")
 
-    compileOnly("org.slf4j:slf4j-api:$slf4jVersion")
+    compileOnly("org.slf4j:slf4j-api:$slf4jVersion") // org.slf4j
     compileOnly("com.google.android:android:$androidVersion") // android.util.Log
 
     //testRuntimeOnly("org.slf4j:slf4j-simple:$slf4jVersion")
-    testRuntimeOnly("ch.qos.logback:logback-classic:1.2.3")
+    testRuntimeOnly("ch.qos.logback:logback-classic:1.2.9")
 }
 
 // gradlew clean -x test build publishToMavenLocal
@@ -34,19 +34,18 @@ defaultTasks("assemble")
 
 tasks.compileKotlin {
     kotlinOptions {
-        jvmTarget = "11"
+        jvmTarget = javaVersion
     }
 }
 
-// avoid warnings "jvm target compatibility should be set to the same Java version."
 tasks.compileTestKotlin {
     kotlinOptions {
-        jvmTarget = "11"
+        jvmTarget = javaVersion
     }
 }
 tasks.compileJava {
-    sourceCompatibility = tasks.compileKotlin.get().kotlinOptions.jvmTarget
-    targetCompatibility = tasks.compileKotlin.get().kotlinOptions.jvmTarget
+    sourceCompatibility = javaVersion
+    targetCompatibility = javaVersion
 }
 
 java {

@@ -5,7 +5,7 @@ package de.gmuth.log
  */
 
 import android.util.Log
-import de.gmuth.log.Level.*
+import de.gmuth.log.Logger.Level.*
 
 // https://developer.android.com/reference/android/util/Log
 class AndroidLogAdapter(name: String) : Logger(name) {

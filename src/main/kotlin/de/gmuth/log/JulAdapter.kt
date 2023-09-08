@@ -4,7 +4,7 @@ package de.gmuth.log
  * Copyright (c) 2023 Gerhard Muth
  */
 
-import de.gmuth.log.Level.*
+import de.gmuth.log.Logger.Level.*
 
 // forward log messages to java util logging
 // https://docs.oracle.com/javase/8/docs/technotes/guides/logging/overview.html
@@ -13,7 +13,7 @@ class JulAdapter(name: String) : Logger(name) {
     private val julLogger = java.util.logging.Logger.getLogger(name)
 
     override var logLevel: Level
-        get() = julLogger.level.toLogLevel()
+        get() = julLogger.level.toLoggerLevel()
         set(value) {
             julLogger.level = value.toJulLevel()
         }
@@ -35,7 +35,8 @@ class JulAdapter(name: String) : Logger(name) {
     }
 }
 
-fun java.util.logging.Level.toLogLevel(): Level = when (this) {
+// java util logging extension
+fun java.util.logging.Level.toLoggerLevel(): Logger.Level = when (this) {
     java.util.logging.Level.OFF -> OFF
     java.util.logging.Level.FINER, java.util.logging.Level.FINEST, java.util.logging.Level.ALL -> TRACE
     java.util.logging.Level.FINE -> DEBUG

@@ -4,7 +4,7 @@ package de.gmuth.log
  * Copyright (c) 2023 Gerhard Muth
  */
 
-import de.gmuth.log.Level.*
+import de.gmuth.log.Logger.Level.*
 
 typealias MessageSupplier = () -> Any?
 
@@ -31,6 +31,17 @@ abstract class Logger(val name: String) {
         @JvmStatic
         fun getLogger(noOperation: () -> Unit) =
             getLogger(noOperation.javaClass.enclosingClass.name)
+    }
+
+    // ----------- Level -----------
+
+    enum class Level {
+        OFF,
+        TRACE,
+        DEBUG,
+        INFO,
+        WARN,
+        ERROR
     }
 
     // ----------- Logger -----------

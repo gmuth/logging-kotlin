@@ -5,7 +5,7 @@ package de.gmuth.log
  */
 
 class LogEvent(
-    val level: Level,
+    val level: Logger.Level,
     val supplyMessage: MessageSupplier,
     val throwable: Throwable?
 ) {
