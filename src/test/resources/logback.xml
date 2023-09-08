@@ -1,0 +1,11 @@
+<configuration>
+  <appender class="ch.qos.logback.core.ConsoleAppender" name="CONSOLE">
+    <encoder>
+      <pattern>LOGBACK %d{HH:mm:ss.SSS} %-40logger %-5level %msg%ex%n</pattern>
+    </encoder>
+  </appender>
+  <logger level="TRACE" name="de.gmuth"/>
+  <root level="TRACE">
+    <appender-ref ref="CONSOLE"/>
+  </root>
+</configuration>
