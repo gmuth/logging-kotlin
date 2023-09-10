@@ -8,7 +8,7 @@ import android.util.Log
 import de.gmuth.log.Logger.Level.*
 
 // https://developer.android.com/reference/android/util/Log
-class AndroidLogAdapter(name: String) : Logger(name) {
+class AndroidLogger(name: String) : Logger(name) {
 
     override fun isEnabled(level: Level) =
         when (level) {

@@ -2,11 +2,11 @@ package de.gmuth.log
 
 import org.junit.Test
 
-class Slf4jAdapterTest {
+class Slf4jLoggerTest {
 
     @Test
-    fun slf4jAdapterTest() {
-        Logger.createLogger = ::Slf4jAdapter
+    fun slf4jLoggerTest() {
+        Logger.createLogger = ::Slf4jLogger
         LoggerTest(Slf4jAdapterTest::class.java).run()
     }
 }

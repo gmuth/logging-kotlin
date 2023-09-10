@@ -7,7 +7,7 @@ package de.gmuth.log
 import de.gmuth.log.Logger.Level.*
 
 // http://www.slf4j.org
-class Slf4jAdapter(name: String) : Logger(name) {
+class Slf4jLogger(name: String) : Logger(name) {
 
     private val slf4jLogger = org.slf4j.LoggerFactory.getLogger(name)
 

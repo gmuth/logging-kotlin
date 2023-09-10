@@ -8,7 +8,7 @@ import de.gmuth.log.Logger.Level.*
 
 // forward log messages to java util logging
 // https://docs.oracle.com/javase/8/docs/technotes/guides/logging/overview.html
-class JulAdapter(name: String) : Logger(name) {
+class JulLogger(name: String) : Logger(name) {
 
     private val julLogger = java.util.logging.Logger.getLogger(name)
 
